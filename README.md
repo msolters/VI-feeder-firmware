@@ -51,8 +51,10 @@ The cloud needs to know when a feeder dispenses food; the datetime and quantity 
 
 #### RFID List
 The cloud will need to know what pets have been registered to a feeder, as well as the corresponding RFID of those pets.  It's recommended that the serial transmission of this message be wrapped in a method which can be called from anywhere in the feeder code, such as on boot but also on request from the cloud.
-Event header: `RL`
-Event payload example for 2 pets:
+
+`AB` header: `RL`
+
+Payload example, for 2 pets:
 
 ```
 {
