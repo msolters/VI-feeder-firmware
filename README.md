@@ -41,4 +41,38 @@ These can be nested arbitrarily, and the actual literal value of the keys can be
 The Photon would expect the payload of outgoing messages (`XXX...XXX`) to take this form.  **Notice that we are also stripping the beginning { and ending }.**  See below for specific examples for each type of event.
 
 ### Outgoing Messages - Reference
-[add breakdown of possible `AB` values here for Diane]
+#### Feedings
+The cloud needs to know when a feeder dispenses food; the datetime and quantity of this food are the two most important things here.
+
+#### Pet Presence
+##### Pet Appears
+
+##### Pet Leaves
+
+#### RFID List
+The cloud will need to know what pets have been registered to a feeder, as well as the corresponding RFID of those pets.  It's recommended that the serial transmission of this message be wrapped in a method which can be called from anywhere in the feeder code, such as on boot but also on request from the cloud.
+Event header: `RL`
+Event payload example for 2 pets:
+
+```
+{
+  pets: [
+    {
+      name: 'Alice',
+      rfid: 'AAAAAAAAAA'
+    },
+    {
+      name: 'Bob',
+      rfid: 'BBBBBBBBBB'
+    }
+  ]
+}
+```
+
+Final event value as string:
+
+```
+char(0x02) + "RLpets:[{name:\'Alice\',rfid:\'AAAAAAAAAA\'},{name:\'Bob\',rfid:\'BBBBBBBBBB\'}]" + char(0x03)
+```
+
+#### Errors
