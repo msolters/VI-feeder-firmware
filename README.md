@@ -1,7 +1,7 @@
 # pi-feeder-firmware
-## Pet Innovations Control firmware
+## Vet Innovations Control firmware
 
-Pre-compiled firmware binary for the Pet Feeder system.  Written in C.
+Pre-compiled firmware binary for the Vet Innovations pet feeder system.  Written in C.
 
 ### Outgoing Message Syntax
 The pet feeder transmits outgoing serial messages to the Photon uC according to the following syntax:
