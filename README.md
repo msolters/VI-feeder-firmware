@@ -1,4 +1,4 @@
-# pi-feeder-firmware
+# VI-feeder-firmware
 ## Vet Innovations Control firmware
 
 Pre-compiled firmware binary for the Vet Innovations pet feeder system.  Written in C.
