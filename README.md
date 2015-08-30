@@ -24,10 +24,10 @@ The rest of the message (`XXX...XXX`) can be any length, and should be a stringi
 
 ```
 {
-  key1: 'value1',
-  key2: 'value2',
+  key1: "value1",
+  key2: "value2",
   key3: {
-    key3_1: 'value3'
+    key3_1: "value3"
   }
 }
 ```
@@ -35,7 +35,7 @@ The rest of the message (`XXX...XXX`) can be any length, and should be a stringi
 These can be nested arbitrarily, and the actual literal value of the keys can be anything.  However, when a JSON object is "stringified," it means that the object is just escaped.  So, the above object would become:
 
 ```
-"key1: \'value1\', key2: \'value2\', key3: {key3_1: \'value3\'}"
+"key1: \"value1\", key2: \"value2\", key3: {key3_1: \"value3\"}"
 ```
 
 The Photon would expect the payload of outgoing messages (`XXX...XXX`) to take this form.  **Notice that we are also stripping the beginning { and ending }.**  See below for specific examples for each type of event.
