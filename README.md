@@ -45,36 +45,78 @@ The Photon would expect the payload of outgoing messages (`XXX...XXX`) to take t
 The cloud needs to know when a feeder dispenses food; the datetime and quantity of this food are the two most important things here.
 
 #### Pet Presence
-##### Pet Appears
+##### Pet Arrives
+When an RFID tag appears within range, we need to report this new pet arrival to the cloud.  This message must contain a UTC timestamp (as an int), as well as the data about the pet that arrived (name and RFID).
 
-##### Pet Leaves
+`AB` header: `PA`
+
+JSON Payload:
+
+```
+{
+  ts: 123456789,
+  pet: {
+    name: "Alice",
+    rfid: "AAAAAAAAAA"
+  }
+}
+```
+
+Serial message expected from Microchip uC:
+
+`char[] exampleMsg = char(0x02) + "PAts:123456789,pet:{name:\"Alice\",rfid:\"AAAAAAAAAA\"}" + char(0x03);`
+
+
+##### Pet Departs
+When an RFID tag disappears from the feeder's detection range for a predefined period of time (~3 ping cycles), we need to report this pet departure to the cloud.  This message must contain a UTC timestamp (as an int), as well as the data about the pet that left (name and RFID).
+
+`AB` header: `PD`
+
+JSON Payload:
+
+```
+{
+  ts: 123456789,
+  pet: {
+    name: "Alice",
+    rfid: "AAAAAAAAAA"
+  }
+}
+```
+
+Serial message expected from Microchip uC:
+
+`char[] exampleMsg = char(0x02) + "PDts:123456789,pet:{name:\"Alice\",rfid:\"AAAAAAAAAA\"}" + char(0x03);`
+
+
+---
 
 #### RFID List
-The cloud will need to know what pets have been registered to a feeder, as well as the corresponding RFID of those pets.  It's recommended that the serial transmission of this message be wrapped in a method which can be called from anywhere in the feeder code, such as on boot but also on request from the cloud.
+The cloud will need to know what pets have been registered to a feeder, as well as the corresponding RFID of those pets.  It's recommended that the serial transmission of this message be wrapped in a method so it can be easily called from anywhere in the feeder code, such as on boot but also on request from the cloud.
 
 `AB` header: `RL`
 
-Payload example, for 2 pets:
+JSON Payoad:
 
 ```
 {
   pets: [
     {
-      name: 'Alice',
-      rfid: 'AAAAAAAAAA'
+      name: "Alice",
+      rfid: "AAAAAAAAAA"
     },
     {
-      name: 'Bob',
-      rfid: 'BBBBBBBBBB'
+      name: "Bob",
+      rfid: "BBBBBBBBBB"
     }
   ]
 }
 ```
 
-Final event value as string:
+Serial message expected from Microchip uC:
 
-```
-char(0x02) + "RLpets:[{name:\'Alice\',rfid:\'AAAAAAAAAA\'},{name:\'Bob\',rfid:\'BBBBBBBBBB\'}]" + char(0x03)
-```
+`char[] exampleMsg = char(0x02) + "RLpets:[{name:\"Alice\",rfid:\"AAAAAAAAAA\"},{name:\"Bob\",rfid:\"BBBBBBBBBB\"}]" + char(0x03);`
+
+---
 
 #### Errors
