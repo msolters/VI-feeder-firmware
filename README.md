@@ -44,6 +44,8 @@ The Photon would expect the payload of outgoing messages (`XXX...XXX`) to take t
 #### Feedings
 The cloud needs to know when a feeder dispenses food; the datetime and quantity of this food are the two most important things here.
 
+---
+
 #### Pet Presence
 ##### Pet Arrives
 When an RFID tag appears within range, we need to report this new pet arrival to the cloud.  This message must contain a UTC timestamp (as an int), as well as the data about the pet that arrived (name and RFID).
