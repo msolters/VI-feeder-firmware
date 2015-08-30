@@ -10,9 +10,9 @@ The pet feeder transmits outgoing serial messages to the Photon uC according to 
   0x02 A B XXXXXXXXXXXX....XXX 0x03
 ```
 
-This means messages are framed by two characters:
-*  0x02 = ASCII 'start_char'
-*  0x03 = ASCII 'end_char'
+This means messages are framed by two characters.  (Of course the actual serial data does not include spaces between characters, and the hex codes must be cast as chars).
+*  0x02 = ASCII 'Start Text' char
+*  0x03 = ASCII 'End Text' char
 
 Any messages not framed between these chars will be discarded by the Photon.
 
